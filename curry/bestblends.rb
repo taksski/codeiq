@@ -15,7 +15,7 @@ def min_cut(graph)
                }/2
               ]
   until graph.nodes.size == 1
-    graph.sort_by_maximum_neighborhood_order
+    graph.sort_by_maximum_adjacency_ordering
     if graph.nodes[-1].neighbors_weight < candidate[2] # 候補となる頂点の組の入れ替え
       candidate = [graph.nodes[0..-2].map{ |n| n.name }.flatten.sort,
                    [graph.nodes[-1].name].flatten.sort,

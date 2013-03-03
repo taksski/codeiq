@@ -54,12 +54,12 @@ class Graph
     @nodes.delete_if { |n| n.name == src }
   end
 
-  def sort_by_maximum_neighborhood_order
+  def sort_by_maximum_adjacency_ordering
     result = []
     result.push @nodes.pop
     while @nodes.count > 0
       names = result.map { |node| node.name }
-      nearest = put_nearest_neighbor(names)
+      nearest = nearest_neighbor(names)
       result.push put_nearest_neighbor(names)
       @nodes.delete_if { |node| node.name == nearest.name }
     end
@@ -68,7 +68,7 @@ class Graph
 
   private
   # 名前の配列に対して、もっとも結合度が大きい頂点を返す
-  def put_nearest_neighbor(names)
+  def nearest_neighbor(names)
     @nodes.max { |a, b|
       a_weight = a.neighbors_weight(names)
       b_weight = b.neighbors_weight(names)
@@ -93,7 +93,7 @@ graph.rb --- グラフを表す
             頂点がなければ、新たに作成して追加する。
    merge    指定した2つの名前の頂点を結合する。
             結合した頂点に隣接する頂点間の枝の結合度は、それぞれ加算する。
-   sort_by_maximum_neighborhood_order
+   sort_by_maximum_adjacency_ordering
             nodesの末尾の頂点を基準として、最大隣接順序を満たすように
             頂点を並べ直す。
 
