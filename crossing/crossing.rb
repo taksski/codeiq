@@ -16,11 +16,9 @@ end
 
 cnt = 0
 begin_time = Time.now
-# puts begin_time
 open("crossing.txt", "r") do |file|
   a = file.map { |line| line.chop.to_i }
   cnt = count(a, a.size / 2)
 end
 end_time = Time.now
-# puts end_time
 puts "#{cnt},#{(end_time-begin_time).to_i}"
